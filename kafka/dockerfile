@@ -1,15 +1,25 @@
+# Confluent Kafka 7.5.1 sürümünü içeren resmi Docker imajını kullan
 FROM confluentinc/cp-kafka:7.5.1
- 
+
+# root kullanıcısı olarak işlem yapabilmek için USER komutunu root olarak ayarlıyoruz
 USER root
+
+# YUM paket yöneticisi ile sistem paketlerini güncelle ve curl paketini yükle
 RUN yum -y update && yum -y install curl
+
+# '/opt' dizinini oluştur ve bu dizine yazma izni ver
 RUN mkdir -p /opt && chmod 777 /opt
- 
+
+# Prometheus JMX Exporter'ın belirtilen sürümünü indir ve '/opt' dizinine kopyala
 ARG JMX_EXPORTER_VERSION=0.17.2
 RUN curl -sSL https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/${JMX_EXPORTER_VERSION}/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar \
     -o /opt/jmx_prometheus_javaagent.jar
- 
+
+# JMX Exporter yapılandırma dosyasını konteynerin içine kopyala
 COPY jmx_exporter_config.yaml /opt/jmx_exporter_config.yaml
- 
+
+# Kafka'ya JMX Exporter'ı yüklemek için JVM opsiyonlarını ayarla
 ENV KAFKA_OPTS="-javaagent:/opt/jmx_prometheus_javaagent.jar=5556:/opt/jmx_exporter_config.yaml"
- 
+
+# 5556 portunu dışarıya aç, Prometheus'un JMX verilerini bu port üzerinden almasını sağlar
 EXPOSE 5556

@@ -1,21 +1,20 @@
-# 1. Node.js image'ını temel alıyoruz
+# Node.js 16 sürümünü içeren resmi Docker imajını kullan
 FROM node:16
 
-# 2. Çalışma dizinini oluşturuyoruz
+# Çalışma dizinini '/app' olarak ayarla
 WORKDIR /app
 
-# 3. package.json ve package-lock.json dosyalarını kopyalıyoruz
-# Bu adım sadece bağımlılıkların güncellenmesi için yapılır
+# package.json ve package-lock.json dosyalarını konteynerin içine kopyala
 COPY package*.json ./
 
-# 4. Uygulama bağımlılıklarını yüklüyoruz
+# Bağımlılıkları yükle
 RUN npm install
 
-# 5. Uygulama dosyalarını kopyalıyoruz
+# Proje dosyalarını konteynerin içine kopyala
 COPY . .
 
-# 6. Uygulamanın çalışacağı portu expose ediyoruz (örneğin, 3000)
+# 8080 portunu dışarıya aç
 EXPOSE 8080
 
-# 7. Uygulamanın başlatılmasını sağlıyoruz
+# 'api.js' dosyasını çalıştırarak Node.js uygulamasını başlat
 CMD [ "node", "api.js" ]

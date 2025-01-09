@@ -52,33 +52,39 @@ Folder Structure
 | | package.json
 | | package-lock.json
 
+• docker-compose.yml: Docker Compose definition for all services (Kafka brokers, Kafka UI, producer, consumer, API, Mongo, Prometheus).
+• prometheus.yml: Specifies which targets Prometheus will collect metrics from.
+• kafka folder: Custom Dockerfile and configuration for Kafka JMX Exporter integration.
+• producer, consumer, api folders: Dockerfile and application source files for each service.
+• helm folder: Helm Chart files prepared for use in a Kubernetes environment.
+
 Installation Options
 2.1. Docker Compose Installation
-
-Ensure Docker and Docker Compose are installed.
-Navigate to the project folder and run the following command:
-bash docker-compose up --build
-Verify that all containers are “Up” by running:
-bash watch docker ps -a
-You can test the services on the following ports:
-Kafka UI: http://localhost:8081
-Prometheus: http://localhost:9090
+  1.Ensure Docker and Docker Compose are installed.
+  2.Navigate to the project folder and run the following command:
+  bash docker-compose up --build
+  3.Verify that all containers are “Up” by running:
+  bash watch docker ps -a
+  4.You can test the services on the following ports:
+  Kafka UI: http://localhost:8081
+  Prometheus: http://localhost:9090
 Advantages of Docker Compose
 • Quick solution for local development and testing.
 • Easily run on a single machine.
-2.2. Helm Chart Installation (Kubernetes)
 
-Ensure Kubernetes and Helm (v3 or later) are installed.
-Navigate to the helm folder in the project and run:
-bash helm install my-kafka-cluster .
-Verify that the resources are up by running:
-bash watch kubectl get pods
-Access Kafka UI and Prometheus pages:
-Kafka UI: http://localhost:30080
-Prometheus: http://localhost:30082
+2.2. Helm Chart Installation (Kubernetes)
+  1.Ensure Kubernetes and Helm (v3 or later) are installed.
+  2.Navigate to the helm folder in the project and run:
+  bash helm install my-kafka-cluster .
+  3.Verify that the resources are up by running:
+  bash watch kubectl get pods
+  4.Access Kafka UI and Prometheus pages:
+  Kafka UI: http://localhost:30080
+  Prometheus: http://localhost:30082
 Advantages of Helm Chart
 • Easy to scale (scaling), high availability, and other features in Kubernetes environments.
 • Manage configurations by modifying values.yaml for different environments (dev, stage, prod).
+
 Kafka Metrics and Prometheus
 • Kafka brokers expose metrics on port 5556 via JMX Exporter.
 • Prometheus scrapes the following addresses for metrics: kafka1:5556, kafka2:5556, kafka3:5556 (configured in prometheus.yml for Compose or ConfigMap for Helm).
@@ -93,5 +99,6 @@ Consumer → Listens to the events topic, retrieves new messages, and saves them
 API → Reads data from MongoDB and serves a REST endpoint at http://localhost:8080 (Compose) or via NodePort.
 Kafka UI → Provides a graphical interface to manage topics, partitions, consumer groups, etc.
 Prometheus → Collects Kafka JMX metrics and other service metrics. You can observe them via the Prometheus UI.
+
 Result
 This project allows you to quickly deploy a 3-broker Kafka cluster + Mongo + Producer + Consumer + API + Prometheus using either Docker Compose or Helm Chart. It provides a realistic streaming and metrics environment that you can easily test.

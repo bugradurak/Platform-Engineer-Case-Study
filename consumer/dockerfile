@@ -1,13 +1,20 @@
+# Node.js 16 sürümünü içeren resmi Docker imajını kullan
 FROM node:16
 
+# Çalışma dizinini '/usr/src/app' olarak ayarla
 WORKDIR /usr/src/app
 
+# package.json ve package-lock.json dosyalarını konteynerin içine kopyala
 COPY package*.json ./
 
+# Bağımlılıkları yükle
 RUN npm install
 
+# Proje dosyalarını konteynerin içine kopyala
 COPY . .
 
+# 8080 portunu dışarıya aç
 EXPOSE 8080
 
+# 'consumer.js' dosyasını çalıştırarak Node.js uygulamasını başlat
 CMD [ "node", "consumer.js" ]

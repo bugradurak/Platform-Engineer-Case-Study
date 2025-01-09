@@ -1,7 +1,7 @@
 Proje: Platform Mühendisi - Vaka Çalışması
 Bu projede,ubuntu-server üzerinde üç broker’lı bir Kafka kümesi, Kafka UI, Producer, Consumer, API, MongoDB ve Prometheus birlikte çalışacak şekilde hem Docker Compose hem de Helm ile ayağa kaldırılabilir.
-•Docker Compose seçeneği: Lokal geliştirme veya hızlı test için idealdir.
-•Helm Chart seçeneği: Kubernetes ortamında kurulum yapmak için uygundur.
+• Docker Compose seçeneği: Lokal geliştirme veya hızlı test için idealdir.
+• Helm Chart seçeneği: Kubernetes ortamında kurulum yapmak için uygundur.
 Not: Her iki yaklaşımda da JMX Exporter sayesinde Kafka broker metrikleri Prometheus tarafından toplanır. 
 
 Klasör Yapısı
@@ -52,19 +52,19 @@ Klasör Yapısı
 | | package.json
 | | package-lock.json
  
-•docker-compose.yml: Tüm servislerin (kafka broker’ları, kafka-ui, producer, consumer, API, mongo, prometheus) Docker Compose tanımı.
-•prometheus.yml: Prometheus’un hangi hedeflerden metrik toplayacağını belirler.
-•kafka klasörü: Kafka JMX Exporter entegresi için özel Dockerfile ve config.
-•producer, consumer, api klasörleri: Her servise ait Dockerfile ve uygulama kaynak dosyaları.
-•helm klasörü: Kubernetes ortamında kullanmak için hazırlanmış Helm Chart dosyaları.
+• docker-compose.yml: Tüm servislerin (kafka broker’ları, kafka-ui, producer, consumer, API, mongo, prometheus) Docker Compose tanımı.
+• prometheus.yml: Prometheus’un hangi hedeflerden metrik toplayacağını belirler.
+• kafka klasörü: Kafka JMX Exporter entegresi için özel Dockerfile ve config.
+• producer, consumer, api klasörleri: Her servise ait Dockerfile ve uygulama kaynak dosyaları.
+• helm klasörü: Kubernetes ortamında kullanmak için hazırlanmış Helm Chart dosyaları.
 
 Kurulum Seçenekleri
 2.1. Docker Compose ile Kurulum
   1.Docker ve Docker Compose kurulu olduğundan emin ol.
   2.Proje klasörüne gir ve şu komutu çalıştır:
-    docker-compose up --build
+    bash docker-compose up --build
   3.Aşağıdaki komut ile tüm konteynerlerin “Up” durumda olduğunu doğrula.
-    watch docker ps -a  
+    bash watch docker ps -a  
   4.Aşağıdaki portlar üzerinden servisleri test edebilirsin .
     Kafka UI: http://localhost:8081
     Prometheus: http://localhost:9090
@@ -75,9 +75,9 @@ Docker Compose Avantajları
 2.2. Helm Chart ile Kurulum (Kubernetes)
   1.Kubernetes ve Helm (v3 veya üstü) kurulu olduğundan emin ol.
   2.Proje klasöründen helm klasörüne gir ve bu kodu çalıştır :
-    helm install my-kafka-cluster .
+    bash helm install my-kafka-cluster .
   3.Aşağıdaki komutla kaynakların ayağa kalktığını doğrula.
-    watch kubectl get pods  
+    bash watch kubectl get pods  
   4.Kafka UI ve Prometheus sayfalarına ulaşmak için:
     Kafka UI: http://localhost:30080
     Prometheus: http://localhost:30082 

@@ -1,20 +1,20 @@
-# Node.js image'ı kullanıyoruz
+# Node.js 16 sürümünü içeren resmi Docker imajını kullan
 FROM node:16
 
-# Çalışma dizini oluşturuluyor
+# Çalışma dizinini '/usr/src/app' olarak ayarla
 WORKDIR /usr/src/app
 
-# Uygulama dosyalarını kopyala
+# package.json ve package-lock.json dosyalarını konteynerin içine kopyala
 COPY package*.json ./
 
 # Bağımlılıkları yükle
 RUN npm install
 
-# Uygulama dosyalarını kopyala
+# Uygulama dosyalarını konteynerin içine kopyala
 COPY . .
 
-# Portu expose et
+# 8080 portunu dışarıya aç
 EXPOSE 8080
 
-# Uygulama başlatılıyor
+# 'producer.js' dosyasını çalıştırarak Node.js uygulamasını başlat
 CMD [ "node", "producer.js" ]

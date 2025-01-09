@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: producer
+  labels:
+    app: producer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: producer
+  template:
+    metadata:
+      labels:
+        app: producer
+    spec:
+      containers:
+        - name: producer
+          image: {{ .Values.producer.image }}
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: KAFKA_BROKER_URL
+              value: "kafka1:29092,kafka2:29094,kafka3:29096"
+            - name: KAFKA_TOPIC
+              value: "events"

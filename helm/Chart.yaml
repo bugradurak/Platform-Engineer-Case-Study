@@ -1,0 +1,5 @@
+apiVersion: v2
+name: my-kafka-helm-chart
+description: Helm chart for a multi-service Kafka setup (3-broker cluster, UI, producer, consumer, API, Mongo)
+version: 0.1.0
+appVersion: "1.0"

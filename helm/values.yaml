@@ -1,0 +1,26 @@
+kafka1:
+  image: bugradurak/kafka1:latest
+
+kafka2:
+  image: bugradurak/kafka2:latest
+
+kafka3:
+  image: bugradurak/kafka3:latest
+
+kafkaUi:
+  image: provectuslabs/kafka-ui:latest
+
+producer:
+  image: bugradurak/producer:latest
+
+consumer:
+  image: bugradurak/consumer:latest
+
+api:
+  image: bugradurak/api:latest
+
+mongo:
+  image: mongo
+
+prometheus:
+  image: "prom/prometheus:latest"

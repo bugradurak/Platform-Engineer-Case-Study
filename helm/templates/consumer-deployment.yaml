@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer
+  labels:
+    app: consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consumer
+  template:
+    metadata:
+      labels:
+        app: consumer
+    spec:
+      containers:
+        - name: consumer
+          image: {{ .Values.consumer.image }}
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: KAFKA_BROKER_URL
+              value: "kafka1:29092,kafka2:29094,kafka3:29096"
+            - name: KAFKA_TOPIC
+              value: "events"
+            - name: MONGO_URI
+              value: "mongodb://mongo:27017/events_db"

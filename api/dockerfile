@@ -1,0 +1,21 @@
+# 1. Node.js image'ını temel alıyoruz
+FROM node:16
+
+# 2. Çalışma dizinini oluşturuyoruz
+WORKDIR /app
+
+# 3. package.json ve package-lock.json dosyalarını kopyalıyoruz
+# Bu adım sadece bağımlılıkların güncellenmesi için yapılır
+COPY package*.json ./
+
+# 4. Uygulama bağımlılıklarını yüklüyoruz
+RUN npm install
+
+# 5. Uygulama dosyalarını kopyalıyoruz
+COPY . .
+
+# 6. Uygulamanın çalışacağı portu expose ediyoruz (örneğin, 3000)
+EXPOSE 8080
+
+# 7. Uygulamanın başlatılmasını sağlıyoruz
+CMD [ "node", "api.js" ]

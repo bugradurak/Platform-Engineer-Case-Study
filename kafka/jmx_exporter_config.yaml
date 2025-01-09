@@ -1,0 +1,13 @@
+startDelaySeconds: 0
+ssl: false
+lowercaseOutputName: true
+lowercaseOutputLabelNames: true
+rules:
+# Bu minimal bir örnek. Kafka metriklerinin bir kısmını gösterir.
+# Daha kapsamlı config için https://github.com/prometheus/jmx_exporter/tree/master/example_configs inceleyebilirsin.
+- pattern: "kafka.server<type=(.*), name=(.*)PerSec\\, topic=(.*)><>Count:(\\d+)"
+  name: "kafka_$1_$2_per_sec"
+  labels:
+    topic: "$3"
+  value: "$4"
+  help: "Kafka per-topic metrics"

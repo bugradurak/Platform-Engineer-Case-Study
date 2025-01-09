@@ -1,0 +1,20 @@
+# Node.js image'ı kullanıyoruz
+FROM node:16
+
+# Çalışma dizini oluşturuluyor
+WORKDIR /usr/src/app
+
+# Uygulama dosyalarını kopyala
+COPY package*.json ./
+
+# Bağımlılıkları yükle
+RUN npm install
+
+# Uygulama dosyalarını kopyala
+COPY . .
+
+# Portu expose et
+EXPOSE 8080
+
+# Uygulama başlatılıyor
+CMD [ "node", "producer.js" ]

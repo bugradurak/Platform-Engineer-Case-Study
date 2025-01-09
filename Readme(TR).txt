@@ -8,12 +8,17 @@ Klasör Yapısı
 | docker-compose.yaml
 | prometheus.yml
 | + api
+| | node_modules
 | | api.js
 | | dockerfile
 | | package.json
+| | package-lock.json
 | + consumer
+| | node_modules
 | | consumer.js
 | | dockerfile
+| | package.json
+| | package-lock.json
 | + helm
 | | Chart.yaml
 | | values.yaml
@@ -41,8 +46,11 @@ Klasör Yapısı
 | | dockerfile
 | | jmx_exporter_config.yaml
 | + producer
-  | dockerfile
-  | producer.js
+| | node_modules
+| | dockerfile
+| | producer.js
+| | package.json
+| | package-lock.json
  
 •docker-compose.yml: Tüm servislerin (kafka broker’ları, kafka-ui, producer, consumer, API, mongo, prometheus) Docker Compose tanımı.
 •prometheus.yml: Prometheus’un hangi hedeflerden metrik toplayacağını belirler.

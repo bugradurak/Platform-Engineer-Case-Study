@@ -8,12 +8,17 @@ Folder Structure
 | docker-compose.yaml
 | prometheus.yml
 | + api
+| | node_modules
 | | api.js
 | | dockerfile
 | | package.json
+| | package-lock.json
 | + consumer
+| | node_modules
 | | consumer.js
 | | dockerfile
+| | package.json
+| | package-lock.json
 | + helm
 | | Chart.yaml
 | | values.yaml
@@ -41,14 +46,11 @@ Folder Structure
 | | dockerfile
 | | jmx_exporter_config.yaml
 | + producer
-| dockerfile
-| producer.js
-
-• docker-compose.yml: Defines all services (Kafka brokers, Kafka UI, producer, consumer, API, Mongo, Prometheus) using Docker Compose.
-• prometheus.yml: Specifies which targets Prometheus will scrape metrics from.
-• kafka folder: Special Dockerfile and config for Kafka JMX Exporter integration.
-• producer, consumer, api folders: Dockerfile and application source files for each service.
-• helm folder: Helm Chart files for Kubernetes environment deployment.
+| | node_modules
+| | dockerfile
+| | producer.js
+| | package.json
+| | package-lock.json
 
 Installation Options
 2.1. Docker Compose Installation
